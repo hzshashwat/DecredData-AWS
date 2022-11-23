@@ -4,8 +4,8 @@ from userprofiles.models import User
 
 # Create your models here.
 def create_path(instance, filename):
-    return os.path.join(
-        instance.owned_by,
+    return os.path.join('files',
+        instance.owned_by.username,
         filename
     )
 
