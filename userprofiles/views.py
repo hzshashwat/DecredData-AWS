@@ -38,3 +38,25 @@ class ProfileApiViewSet(APIView):
 
         except Exception as e:
             return Response({"error": str(e)})
+
+    def put(self, request):
+        try :
+            profile = models.Profile.objects.get(user = self.request.user)
+            profileobj = serializers.ProfileSerializer(profile, data=request.data)
+            if profileobj.is_valid():
+                profileobj.save()
+                return Response({"message" : "Profile info updated."})
+            else :
+                return Response({"message": profileobj.errors,
+                "status": "Failed"
+                })
+        except:
+            profileobj = serializers.ProfileSerializer(data=request.data)
+            if profileobj.is_valid():
+                profileobj.validated_data['user'] = self.request.user
+                profileobj.save()
+                return Response({"message" : "Profile info updated."})
+            else :
+                return Response({"message": profileobj.errors,
+                "status": "Failed"
+                })
