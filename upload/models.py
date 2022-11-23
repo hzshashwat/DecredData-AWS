@@ -17,3 +17,4 @@ class File(models.Model):
     urltoken = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
+    filetype = models.CharField(max_length=50, default='Unknown')
