@@ -1,1 +1,1 @@
-web: gunicorn decreddata.wsgi.py
+web: gunicorn decreddata.wsgi
