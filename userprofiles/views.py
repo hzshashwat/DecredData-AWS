@@ -7,17 +7,43 @@ from rest_framework.settings import api_settings
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.conf import settings
+from django.shortcuts import render
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.UserSerializer
     queryset = models.User.objects.all()
 
+    # def sendmail(self, request):
+        
+
     def perform_create(self, serializer):
         # Hash password but passwords are not required
         if ('password' in self.request.data):
             password = make_password(self.request.data['password'])
             serializer.save(password=password)
+            
+            # ------------- Sending Welcome Mail ------------- #
+            username = self.request.data['username']
+            to = self.request.data['email']
+
+            html_content = render_to_string("signup_email.html", {'username' : username})
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+            "Welcome to DecredData",
+            text_content,
+            settings.EMAIL_HOST_USER,
+            [to]
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
         else:
             serializer.save()
 
