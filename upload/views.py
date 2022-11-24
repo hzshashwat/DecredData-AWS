@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 import uuid
 
 # Create your views here.
+domain_name = 'decreddata.herokuapp.com'
 class UploadFileApiView(APIView):
     serializer_class = serializers.FileUploadSerializers
     authentication_classes = [JWTAuthentication]
@@ -24,9 +25,10 @@ class UploadFileApiView(APIView):
                 
                 fileobj.validated_data['file_id'] = uuid.uuid4()
                 fileobj.validated_data['urltoken'] = uuid.uuid4()
-
+                file_id = fileobj.validated_data['file_id']
                 fileobj.save()
-                return Response({"message" : "File uploaded successfully."})
+                downloadlink = f'{domain_name}/file/download/{file_id}/'
+                return Response({"message" : "File uploaded successfully.", 'downloadlink' : downloadlink})
             else :
                 return Response({"message": fileobj.errors,
                 "status": "Failed"

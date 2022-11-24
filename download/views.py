@@ -7,7 +7,7 @@ from upload.models import File
 from rest_framework.response import Response
 
 # Create your views here.
-domain_name = '127.0.0.1:8000'
+domain_name = 'decreddata.herokuapp.com'
 class UserFilesApiView(APIView):
     serializer_class = UserFilesSerializer
     authentication_classes = [JWTAuthentication, ]
