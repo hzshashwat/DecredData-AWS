@@ -9,7 +9,7 @@ class UserFilesSerializer(serializers.ModelSerializer):
 class FileDownloadSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ['filename', 'description', 'filetype']
+        fields = ['filename', 'filetype', 'owned_by']
 
 class FileSecurityCheckSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,4 +19,9 @@ class FileSecurityCheckSerializer(serializers.ModelSerializer):
 class FileSecurityCheckPassSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ['filename', 'file_id', 'filetype']
+        fields = ['filename', 'file_id', 'filetype', 'owned_by']
+
+class FinalDownloadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ['filename', 'file', 'file_id', 'filetype', 'owned_by']

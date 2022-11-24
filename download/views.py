@@ -28,8 +28,8 @@ class FileDownloadDescription(APIView):
         try:
             file = File.objects.get(file_id = id)
             filejson = UserFilesSerializer(file)
-            securitychecklink = f'{domain_name}/file/download/{id}/'
-            return Response({'files' : [filejson.data], 'securitychecklink' : securitychecklink})
+            securitychecklink = f'{domain_name}/file/download/{id}/securitycheck/'
+            return Response({'file' : [filejson.data], 'securitychecklink' : securitychecklink})
         except Exception as e:
             return Response({'error' : str(e)})
 
@@ -44,9 +44,21 @@ class FileSecurityCheck(APIView):
                 if fileobj.validated_data['password'] == file.password :
                     urltoken = file.urltoken
                     filejson = FileSecurityCheckPassSerializer(file)
-                    downloadlink = f'{domain_name}/file/decrypt/{urltoken}/download/'
-                    return Response({'files' : [filejson.data], 'downloadlink' : downloadlink})
+                    downloadlinkpage = f'{domain_name}/file/decrypt/{urltoken}/download/'
+                    return Response({'file' : [filejson.data], 'downloadlinkpage' : downloadlinkpage})
                 else:
                     return Response({'message' : 'Incorrect password'})
+        except Exception as e:
+            return Response({'error' : str(e)})
+
+class FinalDownload(APIView):
+    serializers_class = FinalDownloadSerializer
+    def get(self, request, urltoken):
+        try:
+            file = File.objects.get(urltoken = urltoken)
+            filejson = UserFilesSerializer(file)
+            fileurl = filejson.data['file']
+            downloadlink = f'{domain_name}{fileurl}'
+            return Response({'file' : [filejson.data], 'downloadlink' : downloadlink})
         except Exception as e:
             return Response({'error' : str(e)})
