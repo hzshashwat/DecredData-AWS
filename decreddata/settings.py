@@ -80,11 +80,14 @@ WSGI_APPLICATION = 'decreddata.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd1luopqduiiem6',
+        'HOST' : 'ec2-44-205-177-160.compute-1.amazonaws.com',
+        'PORT' : 5432,
+        'USER' : 'kxsfyadygdpvdz',
+        'PASSWORD' : '664d5b3046c7720d232abca1224b1ff6e02e45515f636679e2101c7141dc8b7f'
     }
 }
 
