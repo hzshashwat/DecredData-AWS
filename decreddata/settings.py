@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--)z0wuya4483e2ed!dc(4nh5xle1bwrqds%9qk(+&bg^wj#5&y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = ['localhost', 'decreddata.herokuapp.com']
 
@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'decreddata.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd1luopqduiiem6',
-        'HOST' : 'ec2-44-205-177-160.compute-1.amazonaws.com',
+        'NAME': 'decreddata',
+        'HOST' : 'decreddata.ccltomrakgg4.ap-northeast-1.rds.amazonaws.com',
         'PORT' : 5432,
-        'USER' : 'kxsfyadygdpvdz',
-        'PASSWORD' : '664d5b3046c7720d232abca1224b1ff6e02e45515f636679e2101c7141dc8b7f'
+        'USER' : 'hzshashwat',
+        'PASSWORD' : 'rangerover'
     }
 }
 
