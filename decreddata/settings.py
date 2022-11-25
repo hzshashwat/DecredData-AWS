@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--)z0wuya4483e2ed!dc(4nh5xle1bwrqds%9qk(+&bg^wj#5&y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.environ.get('DEBUG', 1)))
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'ec2-35-78-72-53.ap-northeast-1.compute.amazonaws.com']
+ALLOWED_HOSTS = ['localhost', 'ec2-13-230-111-8.ap-northeast-1.compute.amazonaws.com', '13.230.111.8']
 
 
 # Application definition
@@ -82,12 +82,8 @@ WSGI_APPLICATION = 'decreddata.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'decreddata',
-        'HOST' : 'decreddata.ccltomrakgg4.ap-northeast-1.rds.amazonaws.com',
-        'PORT' : 5432,
-        'USER' : 'hzshashwat',
-        'PASSWORD' : 'rangerover'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
