@@ -3,7 +3,7 @@
 set -e
 
 # TODO: Set to URL of git repo.
-PROJECT_GIT_URL='https://github.com/hzshashwat/DecredData.git '
+PROJECT_GIT_URL='https://github.com/hzshashwat/DecredData-AWS.git'
 
 PROJECT_BASE_PATH='/usr/local/apps'
 VIRTUALENV_BASE_PATH='/usr/local/virtualenvs'
